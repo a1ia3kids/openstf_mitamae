@@ -1,5 +1,5 @@
-template 'adbd.service' do
-    source '/lib/systemd/system/adbd.service'
+template '/lib/systemd/system/adbd.service' do
+    source 'template/adbd.service'
 end
 
 service 'adbd' do
