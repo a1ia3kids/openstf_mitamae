@@ -83,12 +83,12 @@ end
 ############################
 ## stf-processor
 ############################
-template "/lib/systemd/system/stf-processor@#{config[:stf-processor]}.service" do
+template "/lib/systemd/system/stf-processor@#{config["stf-processor"]}.service" do
     variables(appside: config[:domain][:appside], devside: config[:domain][:devside])
     source 'template/stf-processor@.service.erb'
 end
 
-service "stf-processor@#{config[:stf-processor]}" do
+service "stf-processor@#{config["stf-processor"]}" do
     action [:enable, :restart]
 end
 
