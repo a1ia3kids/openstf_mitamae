@@ -209,3 +209,14 @@ end
 service "stf-storage-plugin-image@#{config[:ports]["stf-storage-plugin-image"]}" do
     action [:enable, :restart]
 end
+
+############################
+## stf-storage-plugin-temp
+############################
+template "/lib/systemd/system/stf-storage-plugin-temp@#{config[:ports]["stf-storage-plugin-temp"]}.service" do
+    source 'template/stf-storage-plugin-temp@.service'
+end
+
+service "stf-storage-plugin-temp@#{config[:ports]["stf-storage-plugin-temp"]}" do
+    action [:enable, :restart]
+end
