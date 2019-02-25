@@ -104,17 +104,6 @@ service "stf-processor@#{config["stf-processor"]}" do
     action [:enable, :restart]
 end
 
-case node[:platform]
-when 'redhat'
-  execute 'firewall open tcp 7160 and 7260' do
-    user "root"
-    command <<-EOC
-    firewall-cmd --add-port=7160/tcp --permanent
-    firewall-cmd --add-port=7260/tcp --permanent
-    firewall-cmd --reload
-    EOC
-  end
-end
 
 ############################
 ## stf-provider
@@ -230,4 +219,17 @@ end
 
 service "stf-triproxy-app" do
     action [:enable, :restart]
+end
+
+case node[:platform]
+when 'redhat'
+  execute 'firewall open tcp 7160, 7170 and 7260' do
+    user "root"
+    command <<-EOC
+    firewall-cmd --add-port=7160/tcp --permanent
+    firewall-cmd --add-port=7170/tcp --permanent
+    firewall-cmd --add-port=7260/tcp --permanent
+    firewall-cmd --reload
+    EOC
+  end
 end
