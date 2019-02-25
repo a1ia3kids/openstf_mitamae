@@ -23,6 +23,17 @@ service 'rethinkdb' do
     action [:enable, :restart]
 end
 
+case node[:platform]
+when 'redhat'
+  execute 'firewall open tcp 8080' do
+    user "root"
+    command <<-EOC
+    firewall-cmd --add-port=8080/tcp --permanent
+    firewall-cmd --reload
+    EOC
+  end
+end
+
 ############################
 ## rethinkdb-proxy
 ############################
@@ -41,6 +52,7 @@ when 'redhat'
     user "root"
     command <<-EOC
     firewall-cmd --add-port=28015/tcp --permanent
+    firewall-cmd --reload
     EOC
   end
 end
@@ -99,6 +111,7 @@ when 'redhat'
     command <<-EOC
     firewall-cmd --add-port=7160/tcp --permanent
     firewall-cmd --add-port=7260/tcp --permanent
+    firewall-cmd --reload
     EOC
   end
 end
