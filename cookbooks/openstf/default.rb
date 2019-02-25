@@ -197,3 +197,15 @@ end
 service "stf-storage-plugin-apk@#{config[:ports]["stf-storage-plugin-apk"]}" do
     action [:enable, :restart]
 end
+
+############################
+## stf-storage-plugin-image
+############################
+template "/lib/systemd/system/stf-storage-plugin-image@#{config[:ports]["stf-storage-plugin-image"]}.service" do
+    variables(base_domain: config[:domain][:base])
+    source 'template/stf-storage-plugin-image@.service.erb'
+end
+
+service "stf-storage-plugin-image@#{config[:ports]["stf-storage-plugin-image"]}" do
+    action [:enable, :restart]
+end
