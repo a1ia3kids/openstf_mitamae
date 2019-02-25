@@ -124,10 +124,6 @@ template "/lib/systemd/system/stf-provider@#{config["stf-provider"]}.service" do
     source 'template/stf-provider@.service.erb'
 end
 
-service "stf-provider@#{config["stf-provider"]}" do
-    action [:enable, :restart]
-end
-
 case node[:platform]
 when 'redhat'
   execute 'firewall open tcp 7250, 7270 and 15000-25000' do
@@ -153,4 +149,15 @@ when 'redhat'
     grep -rl 'publicPort' /lib/systemd/system/stf-provider@#{config["stf-provider"]}.service | xargs sed -i -e 's/publicPort/<%= publicPort %>/g'
     EOC
   end
+
+  execute 'systemctl daemon-reload' do
+    user "root"
+    command <<-EOC
+    systemctl daemon-reload
+    EOC
+  end
+end
+
+service "stf-provider@#{config["stf-provider"]}" do
+    action [:enable, :restart]
 end
