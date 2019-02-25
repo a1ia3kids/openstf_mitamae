@@ -256,3 +256,13 @@ service "stf-websocket@#{config["stf-websocket"]}" do
     action [:enable, :restart]
 end
 
+############################
+## stf-api
+############################
+template "/lib/systemd/system/stf-api@#{config["stf-api"]}.service" do
+    variables(secret_key: config[:keys][:secret_key], appside: config[:domain][:appside])
+    source 'template/stf-api@.service.erb'
+end
+service "stf-api@#{config["stf-api"]}" do
+    action [:enable, :restart]
+end
