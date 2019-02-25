@@ -233,3 +233,14 @@ when 'redhat'
     EOC
   end
 end
+
+############################
+## stf-triproxy-dev
+############################
+template "/lib/systemd/system/stf-triproxy-dev.service" do
+    source 'template/stf-triproxy-dev.service'
+end
+
+service "stf-triproxy-dev" do
+    action [:enable, :restart]
+end
