@@ -285,3 +285,7 @@ end
 template "/lib/systemd/system/nginx.service" do
     source 'template/nginx.service'
 end
+
+service "nginx" do
+    action [:enable, :restart]
+end
