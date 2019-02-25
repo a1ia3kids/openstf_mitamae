@@ -1,0 +1,5 @@
+config:
+  keys:
+    rethinkdb_key: adGB+z#g67_T9!nYzv
+    secret_key: G/EauBqdZ8(5h,qq.aP5e&,AsfCG,Nyh
+  ports:
