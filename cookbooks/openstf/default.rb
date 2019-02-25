@@ -252,6 +252,7 @@ template "/lib/systemd/system/stf-websocket@#{config[:ports]["stf-websocket"]}.s
     variables(secret_key: config[:keys][:secret_key], base_domain: config[:domain][:base], appside: config[:domain][:appside])
     source 'template/stf-websocket@.service.erb'
 end
+
 service "stf-websocket@#{config[:ports]["stf-websocket"]}" do
     action [:enable, :restart]
 end
@@ -263,6 +264,7 @@ template "/lib/systemd/system/stf-api@#{config[:ports]["stf-api"]}.service" do
     variables(secret_key: config[:keys][:secret_key], appside: config[:domain][:appside])
     source 'template/stf-api@.service.erb'
 end
+
 service "stf-api@#{config[:ports]["stf-api"]}" do
     action [:enable, :restart]
 end
