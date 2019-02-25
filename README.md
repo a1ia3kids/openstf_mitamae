@@ -7,6 +7,16 @@
 ./install.sh     # apply
 ```
 
+## First things to do
+rethinkdb password is not registered.
+Please register the initial password with the following command.
+
+```
+docker run --rm -v /srv/rethinkdb:/data rethinkdb:2.3 rethinkdb --initial-password yourBrandNewKey
+```
+Register the registerd password in the `nodes/openstf.yml` file.
+
+
 ## Install with one line of script
 
 ```sh
