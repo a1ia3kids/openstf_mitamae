@@ -46,3 +46,15 @@ end
 service "stf-app@#{config[:ports]["stf-app"]}" do
     action [:enable, :restart]
 end
+
+############################
+## stf-auth
+############################
+template "/lib/systemd/system/stf-auth@#{config[:ports]["stf-auth"]}.service" do
+    variables(secret_key: config[:keys][:secret_key], base_domain: config[:domain][:base])
+    source 'template/stf-auth@.service.erb'
+end
+
+service "stf-auth@#{config[:ports]["stf-auth"]}" do
+    action [:enable, :restart]
+end

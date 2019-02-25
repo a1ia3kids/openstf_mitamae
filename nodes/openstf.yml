@@ -7,4 +7,10 @@ config:
     rethinkdb: 172.16.2.3
   ports:
     stf-app: 3100
+    stf-auth: 3200
+    stf-storage-plugin-apk: 3300
+    stf-storage-plugin-image: 3400
+    stf-storage-temp: 3500
+    stf-websocket: 3600
+    stf-api: 3700
 
