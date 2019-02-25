@@ -35,6 +35,16 @@ service 'rethinkdb-proxy-28015' do
     action [:enable, :restart]
 end
 
+case node[:platform]
+when 'redhat'
+  execute 'firewall open tcp 28015' do
+    user "root"
+    command <<-EOC
+    firewall-cmd --add-port=28015/tcp --permanent
+    EOC
+  end
+end
+
 ############################
 ## stf-app
 ############################
