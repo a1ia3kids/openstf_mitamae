@@ -266,3 +266,15 @@ end
 service "stf-api@#{config[:ports]["stf-api"]}" do
     action [:enable, :restart]
 end
+
+############################
+## nginx
+############################
+template "/srv/nignx/nginx.conf" do
+    variables(base_domain: config[:domain][:base], provider_name: config["stf-provider"])
+    source 'template/nginx.conf.erb'
+end
+
+template "/lib/systemd/system/nginx.service" do
+    source 'template/nginx.service'
+end
