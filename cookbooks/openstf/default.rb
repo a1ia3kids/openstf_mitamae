@@ -38,11 +38,11 @@ end
 ############################
 ## stf-app
 ############################
-template "/lib/systemd/system/stf-app@#{config[:ports][:stf-app]}.service" do
+template "/lib/systemd/system/stf-app@#{config[:ports]["stf-app"]}.service" do
     variables(secret_key: config[:keys][:secret_key], base_domain: config[:domain][:base])
     source 'template/stf-app@.service.erb'
 end
 
-service "stf-app@#{config[:ports][ports]}" do
+service "stf-app@#{config[:ports]["stf-app"]}" do
     action [:enable, :restart]
 end
