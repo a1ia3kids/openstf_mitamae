@@ -185,3 +185,15 @@ when 'redhat'
     EOC
   end
 end
+
+############################
+## stf-storage-plugin-apk
+############################
+template "/lib/systemd/system/stf-storage-plugin-apk@#{config[:ports]["stf-storage-plugin-apk"]}.service" do
+    variables(base_domain: config[:domain][:base])
+    source 'template/stf-storage-plugin-apk@.service.erb'
+end
+
+service "stf-storage-plugin-apk@#{config[:ports]["stf-storage-plugin-apk"]}" do
+    action [:enable, :restart]
+end
