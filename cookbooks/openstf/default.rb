@@ -79,3 +79,26 @@ end
 service 'stf-migrate' do
     action [:enable, :restart]
 end
+
+############################
+## stf-processor
+############################
+template "/lib/systemd/system/stf-processor@#{config[:stf-processor]}.service" do
+    variables(appside: config[:domain][:appside], devside: config[:domain][:devside])
+    source 'template/stf-processor@.service.erb'
+end
+
+service "stf-processor@#{config[:stf-processor]}" do
+    action [:enable, :restart]
+end
+
+case node[:platform]
+when 'redhat'
+  execute 'firewall open tcp 7160 and 7260' do
+    user "root"
+    command <<-EOC
+    firewall-cmd --add-port=7160/tcp --permanent
+    firewall-cmd --add-port=7260/tcp --permanent
+    EOC
+  end
+end
