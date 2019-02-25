@@ -3,6 +3,8 @@ config:
     rethinkdb_key: adGB+z#g67_T9!nYzv
     secret_key: G/EauBqdZ8(5h,qq.aP5e&,AsfCG,Nyh
   domain:
+    base: 172.16.2.3
     rethinkdb: 172.16.2.3
   ports:
+    stf-app: 3100
 
