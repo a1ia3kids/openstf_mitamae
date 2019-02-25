@@ -143,7 +143,14 @@ when 'redhat'
   execute 'sed serial' do
     user "root"
     command <<-EOC
-    grep -rl 'serial' /lib/systemd/system/stf-provider@#{config["stf-provider"]}.service | xargs sed -i '' -e 's/serial/<%= serial %>/g'
+    grep -rl 'serial' /lib/systemd/system/stf-provider@#{config["stf-provider"]}.service | xargs sed -i -e 's/serial/<%= serial %>/g'
+    EOC
+  end
+
+  execute 'sed publicPort' do
+    user "root"
+    command <<-EOC
+    grep -rl 'publicPort' /lib/systemd/system/stf-provider@#{config["stf-provider"]}.service | xargs sed -i -e 's/publicPort/<%= publicPort %>/g'
     EOC
   end
 end
