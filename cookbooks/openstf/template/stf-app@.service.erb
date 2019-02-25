@@ -17,6 +17,6 @@ ExecStart=/usr/bin/docker run --rm \
   -p %i:3000 \
   openstf/stf:latest \
   stf app --port 3000 \
-    --auth-url https://<%=@base_domain%>/auth/mock/ \
-    --websocket-url wss://<%=@base_domain%>/
+    --auth-url http://<%=@base_domain%>/auth/mock/ \
+    --websocket-url ws://<%=@base_domain%>/
 ExecStop=-/usr/bin/docker stop -t 10 %p-%i
