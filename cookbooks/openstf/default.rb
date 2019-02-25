@@ -277,7 +277,7 @@ execute 'firewall open tcp 7270 and 7150' do
     EOC
 end
 
-template "/srv/nignx/nginx.conf" do
+template "/srv/nginx/nginx.conf" do
     variables(base_domain: config[:domain][:base], provider_name: config["stf-provider"])
     source 'template/nginx.conf.erb'
 end
