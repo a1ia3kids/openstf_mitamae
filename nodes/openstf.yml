@@ -12,7 +12,7 @@ config:
     stf-auth: 3200
     stf-storage-plugin-apk: 3300
     stf-storage-plugin-image: 3400
-    stf-storage-temp: 3500
+    stf-storage-plugin-temp: 3500
     stf-websocket: 3600
     stf-api: 3700
   stf-processor: kashiwanoha
