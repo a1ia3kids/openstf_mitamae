@@ -58,3 +58,14 @@ end
 service "stf-auth@#{config[:ports]["stf-auth"]}" do
     action [:enable, :restart]
 end
+
+############################
+## stf-migrate
+############################
+template '/lib/systemd/system/stf-migrate.service' do
+    source 'template/stf-migrate.service'
+end
+
+service 'stf-migrate' do
+    action [:enable, :restart]
+end
