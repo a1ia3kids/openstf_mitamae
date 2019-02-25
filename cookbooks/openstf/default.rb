@@ -292,6 +292,7 @@ service "nginx" do
     action [:enable, :restart]
 end
 
+case node[:platform]
 when 'redhat'
     execute 'firewall open http service' do
       user "root"
