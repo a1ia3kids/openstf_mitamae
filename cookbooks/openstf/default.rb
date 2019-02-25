@@ -244,3 +244,15 @@ end
 service "stf-triproxy-dev" do
     action [:enable, :restart]
 end
+
+############################
+## stf-websocket
+############################
+template "/lib/systemd/system/stf-websocket@#{config["stf-websocket"]}.service" do
+    variables(secret_key: config[:keys][:secret_key], base_domain: config[:domain][:base], appside: config[:domain][:appside])
+    source 'template/stf-websocket@.service.erb'
+end
+service "stf-websocket@#{config["stf-websocket"]}" do
+    action [:enable, :restart]
+end
+
