@@ -270,6 +270,13 @@ end
 ############################
 ## nginx
 ############################
+execute 'firewall open tcp 7270 and 7150' do
+    user "root"
+    command <<-EOC
+    mkdir -p /srv/nginx
+    EOC
+end
+
 template "/srv/nignx/nginx.conf" do
     variables(base_domain: config[:domain][:base], provider_name: config["stf-provider"])
     source 'template/nginx.conf.erb'
