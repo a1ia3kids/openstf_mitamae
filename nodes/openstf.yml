@@ -16,4 +16,4 @@ config:
     stf-websocket: 3600
     stf-api: 3700
   stf-processor: kashiwanoha
-
+  stf-provider: kashiwanoha
