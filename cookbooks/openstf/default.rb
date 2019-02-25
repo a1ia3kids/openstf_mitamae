@@ -161,3 +161,27 @@ end
 service "stf-provider@#{config["stf-provider"]}" do
     action [:enable, :restart]
 end
+
+############################
+## stf-reaper
+############################
+template "/lib/systemd/system/stf-reaper.service" do
+    variables(appside: config[:domain][:appside], devside: config[:domain][:devside])
+    source 'template/stf-reaper.service.erb'
+end
+
+service "stf-reaper" do
+    action [:enable, :restart]
+end
+
+case node[:platform]
+when 'redhat'
+  execute 'firewall open tcp 7270 and 7150' do
+    user "root"
+    command <<-EOC
+    firewall-cmd --add-port=7270/tcp --permanent
+    firewall-cmd --add-port=7150/tcp --permanent
+    firewall-cmd --reload
+    EOC
+  end
+end
