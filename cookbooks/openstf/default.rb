@@ -289,3 +289,13 @@ end
 service "nginx" do
     action [:enable, :restart]
 end
+
+when 'redhat'
+    execute 'firewall open http service' do
+      user "root"
+      command <<-EOC
+      firewall-cmd --add-service=http --permanent
+      firewall-cmd --reload
+      EOC
+    end
+end
