@@ -248,21 +248,21 @@ end
 ############################
 ## stf-websocket
 ############################
-template "/lib/systemd/system/stf-websocket@#{config["stf-websocket"]}.service" do
+template "/lib/systemd/system/stf-websocket@#{config[:ports]["stf-websocket"]}.service" do
     variables(secret_key: config[:keys][:secret_key], base_domain: config[:domain][:base], appside: config[:domain][:appside])
     source 'template/stf-websocket@.service.erb'
 end
-service "stf-websocket@#{config["stf-websocket"]}" do
+service "stf-websocket@#{config[:ports]["stf-websocket"]}" do
     action [:enable, :restart]
 end
 
 ############################
 ## stf-api
 ############################
-template "/lib/systemd/system/stf-api@#{config["stf-api"]}.service" do
+template "/lib/systemd/system/stf-api@#{config[:ports]["stf-api"]}.service" do
     variables(secret_key: config[:keys][:secret_key], appside: config[:domain][:appside])
     source 'template/stf-api@.service.erb'
 end
-service "stf-api@#{config["stf-api"]}" do
+service "stf-api@#{config[:ports]["stf-api"]}" do
     action [:enable, :restart]
 end
