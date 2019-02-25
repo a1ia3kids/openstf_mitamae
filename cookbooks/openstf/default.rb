@@ -220,3 +220,14 @@ end
 service "stf-storage-plugin-temp@#{config[:ports]["stf-storage-plugin-temp"]}" do
     action [:enable, :restart]
 end
+
+############################
+## stf-triproxy-app
+############################
+template "/lib/systemd/system/stf-triproxy-app.service" do
+    source 'template/stf-triproxy-app.service'
+end
+
+service "stf-triproxy-app" do
+    action [:enable, :restart]
+end
