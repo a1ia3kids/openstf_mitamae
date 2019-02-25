@@ -38,7 +38,7 @@ end
 ############################
 ## stf-app
 ############################
-template "/lib/systemd/system/stf-app@#{config[:ports][ports]}.service"
+template "/lib/systemd/system/stf-app@#{config[:ports][ports]}.service" do
     variables(secret_key: config[:keys][:secret_key], base_domain: config[:domain][:base])
     source 'template/stf-app@.service.erb'
 end
